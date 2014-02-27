@@ -57,11 +57,7 @@ module.exports.probing = function probing(options) {
             var batch = eventQueue[0];
             if (batch.length > 0) {
                 var next = batch.shift(); // return next event
-                emitter.emit('delivered', {
-                    message: next.message, 
-                    source: next.cause ? next.cause.context.self : undefined,
-                    destination: next.context.self
-                });
+                emitter.emit('delivered', {event: next});
                 
                 return next;
             }
@@ -127,7 +123,7 @@ module.exports.probing = function probing(options) {
             }
         } catch (exception) {
             emitter.emit('exception',
-                {exception: exception, actor: event.context.self});            
+                {exception: exception, event: event});
             effect.exception = exception;
         }
         applyBehaviorEffect(effect);  // WARNING: will change `_effect`
@@ -150,10 +146,7 @@ module.exports.probing = function probing(options) {
                     context: context
                 };
                 _effect.sent.push(event);
-                emitter.emit('send', {
-                    message: message, 
-                    source: event.cause ? event.cause.context.self : undefined, 
-                    destination: context.self});
+                emitter.emit('send', {event: event});
                 setImmediate(steppingDispatch);
             };
             var context = {
@@ -163,10 +156,7 @@ module.exports.probing = function probing(options) {
                 config: sendToConfig
             };
             _effect.created.push(context);
-            emitter.emit('created', {
-                creator: _effect.event ? _effect.event.context.self : undefined,
-                actor: actor
-            });
+            emitter.emit('created', {event: _effect.event, context: context});
             return actor;
         };
 
