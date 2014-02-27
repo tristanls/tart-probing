@@ -5,6 +5,7 @@
   "scripts": {
     "ansible": "node examples/ansible.js",
     "inject-examples": "node scripts/injectExamples.js",
+    "marshal": "node examples/marshal.js",
     "readme": "node examples/readme.js",
     "test": "node scripts/test.js"
   },
@@ -14,6 +15,7 @@
     "discover-tcp-transport": "4.0.0",
     "nodeunit": "0.8.4",
     "tart-ansible": "0.0.4",
+    "tart-marshal": "0.1.3",
     "tart-transport-http": "0.1.0",
     "tart-transport-udp": "0.1.0"
   },
