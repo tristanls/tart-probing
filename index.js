@@ -116,8 +116,11 @@ module.exports.probing = function probing(options) {
             event.context.behavior(event.message);  // execute actor behavior
             if (start) {
                 var diff = process.hrtime(start);
-                emitter.emit('duration',
-                    {seconds: diff[0], nanoseconds: diff[1]});                
+                emitter.emit('duration', {
+                    event: event,
+                    seconds: diff[0],
+                    nanoseconds: diff[1]
+                });
             }
             if (behavior !== event.context.behavior) {
                 effect.became = event.context.behavior;
