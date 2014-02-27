@@ -67,6 +67,7 @@ var becomeBeh = function becomeBeh(message) {
 var oneTimeBeh = function oneTimeBeh(message) {
     var start = process.hrtime();
     var actor = this.sponsor(createdBeh); // create
+    this.self('explode'); // send to self
     actor('foo'); // send
     actor('foo2');
     this.config({

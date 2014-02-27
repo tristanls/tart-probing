@@ -102,10 +102,10 @@ module.exports.probing = function probing(options) {
         }
         var effect = _effect;
         effect.event = event;
+        var start = _events.EventEmitter.listenerCount(emitter, 'duration');
         try {
             var behavior = event.context.behavior;
             effect.behavior = behavior;
-            var start = _events.EventEmitter.listenerCount(emitter, 'duration');
             if (start) {
                 start = process.hrtime();
             }
@@ -124,6 +124,14 @@ module.exports.probing = function probing(options) {
         } catch (exception) {
             emitter.emit('exception',
                 {exception: exception, event: event});
+            if (start) {
+                var diff = process.hrtime(start);
+                emitter.emit('duration', {
+                    event: event,
+                    seconds: diff[0],
+                    nanoseconds: diff[1]
+                });
+            }
             effect.exception = exception;
         }
         applyBehaviorEffect(effect);  // WARNING: will change `_effect`
