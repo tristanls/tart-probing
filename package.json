@@ -1,0 +1,32 @@
+{
+  "name": "tart-probing",
+  "version": "0.0.0",
+  "description": "Tart probing",
+  "scripts": {
+    "inject-examples": "node scripts/injectExamples.js",
+    "readme": "node examples/readme.js",
+    "test": "node scripts/test.js"
+  },
+  "main": "index.js",
+  "devDependencies": {
+    "nodeunit": "0.8.4"
+  },
+  "dependencies": {
+    "tart": "0.2.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tristanls/tart-probing.git"
+  },
+  "keywords": [
+    "tart",
+    "probing",
+    "configuration",
+    "actor"
+  ],
+  "contributors": [
+    "Dale Schumacher <dale.schumacher@gmail.com>",
+    "Tristan Slominski <tristan.slominski@gmail.com>"
+  ],
+  "license": "MIT"
+}
